@@ -4,7 +4,7 @@ INSTALL_DIR=${INSTALL_DIR:-/opt}
 WORK_DIR=${WORK_DIR:-~/install}
 
 # Constants
-URL="http://download.oracle.com/otn-pub/java/jdk/7u15-b03/jdk-7u15-linux-i586.tar.gz"
+URL="http://www.java.net/download/jdk7u60/archive/b15/binaries/jdk-7u60-ea-bin-b15-linux-i586-16_apr_2014.tar.gz"
 FILENAME="jdk-7u15-linux-i586.tar.gz"
 DIR="jdk-7u15-linux-i586"
 PROFILE=/etc/profile.d/java.sh
