@@ -15,6 +15,10 @@ sudo apt-get install -y git git-core
 sudo apt-get install -y gedit
 #vim
 sudo apt-get install -y vim
+#openssh-server
+sudo apt-get install -y openssh-server
+#htop
+sudo apt-get install -y htop
 
 #Fcitx输入法安装
 
