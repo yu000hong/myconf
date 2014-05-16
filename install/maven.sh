@@ -12,7 +12,7 @@ PROFILE=/etc/profile.d/maven.sh
 cd $WORK_DIR
 wget $URL
 tar -xzf $FILENAME
-sudo mv $IDR $INSTALL_DIR
+sudo mv $DIR $INSTALL_DIR
 
 sudo echo "#!/bin/bash" > $PROFILE
 sudo echo "#" >> $PROFILE
