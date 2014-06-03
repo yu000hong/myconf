@@ -17,8 +17,8 @@ sudo apt-get install -y gedit
 sudo apt-get install -y vim
 #curl
 sudo apt-get install -y curl
-#rar
-sudo apt-get install -y rar
+#rar unrar
+sudo apt-get install -y rar unrar
 #openssh-server
 sudo apt-get install -y openssh-server
 #htop
