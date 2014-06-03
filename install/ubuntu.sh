@@ -15,6 +15,10 @@ sudo apt-get install -y git git-core
 sudo apt-get install -y gedit
 #vim
 sudo apt-get install -y vim
+#curl
+sudo apt-get install -y curl
+#rar
+sudo apt-get install -y rar
 #openssh-server
 sudo apt-get install -y openssh-server
 #htop
