@@ -7,6 +7,8 @@ INSTALL_DIR=${INSTALL_DIR:-~/install}
 mkdir -p $INSTALL_DIR
 
 
+sudo apt-get install -y build-essential
+
 #SVN
 sudo apt-get install -y subversion
 #git
