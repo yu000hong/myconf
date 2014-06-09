@@ -8,6 +8,8 @@ mkdir -p $INSTALL_DIR
 
 
 sudo apt-get install -y build-essential
+#mail
+sudo apt-get install -y mailutils
 
 #SVN
 sudo apt-get install -y subversion
