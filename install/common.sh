@@ -21,6 +21,24 @@ function get_package_name(){
     find $workdir -maxdepth 1 -iname "$file" -type $type
 }
 
-#demo
+function success_install(){
+    software=$1
+    echo -e "\e[1;34mSuccess to install software [$software]\e[0m"
+}
+
+function fail_install(){
+    software=$1
+    message=$2
+    echo -e "\e[1;41mFail to install software [$software]\e[0m"
+    if [ "$message" != "" ] ; then
+        echo -e "\e[1;41mCause: $message\e[0m"
+    fi
+}
+
+#test
+#success_install java
+#fail_install java "i don't know reason."
+
+#test
 #package_exists /home/yuhong4/install 'java-7-*.tar.gz' f
 #get_package_name /home/yuhong4/install 'java-7-*.tar.gz' f
