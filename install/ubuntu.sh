@@ -53,3 +53,6 @@ cd lua-5.2.3
 make linux
 sudo make install
 cd $INSTALL_DIR #back to install directory
+
+# add sudo priviledge
+sudo echo "yuhong4 ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
