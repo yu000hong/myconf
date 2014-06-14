@@ -6,7 +6,7 @@
 INSTALL_DIR=${INSTALL_DIR:-~/install}
 mkdir -p $INSTALL_DIR
 
-
+#linux develop environment
 sudo apt-get install -y build-essential
 #mail
 sudo apt-get install -y mailutils
