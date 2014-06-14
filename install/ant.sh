@@ -4,14 +4,22 @@ INSTALL_DIR=${INSTALL_DIR:-/opt}
 WORK_DIR=${WORK_DIR:-~/install}
 
 # Constants
-URL="http://apache.stu.edu.tw//ant/binaries/apache-ant-1.9.3-bin.tar.gz"
+URL="http://apache.stu.edu.tw/ant/binaries/apache-ant-1.9.3-bin.tar.gz"
 FILENAME="apache-ant-1.9.3-bin.tar.gz"
 DIR="apache-ant-1.9.3"
 PROFILE=/etc/profile.d/ant.sh
 
+if [ ! -d $WORKDIR ] ; then
+    mkdir $WORKDIR
+fi
 cd $WORK_DIR
-wget $URL
-tar -xzf $FILENAME
+wget $URL && tar -xzf $FILENAME
+
+if [ $? -ne 0 ] ; then
+    echo "$0 failed."
+    exit 1
+fi
+
 sudo mv $DIR $INSTALL_DIR
 
 sudo echo "#!/bin/bash" > $PROFILE

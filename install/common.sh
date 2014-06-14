@@ -1,20 +1,26 @@
 #!/bin/bash
 
-# find whether the binary file of the software exists
-# in the installation directory
-function bin_exists(){
-    install_dir=$1
-    bin_regex=$2
-    [ -f "$install_dir/$bin_regex" ] && return 0
-    return 1
+function package_exists(){
+    workdir=$1
+    file=$2
+    type=$3
+    found=( `find $workdir -maxdepth 1 -iname "$file" -type $type` )
+    if [ ${#found[@]} -gt 1 ] ; then
+        return 2
+    elif [ ${#found[@]} -eq 0 ] ; then
+        return 1
+    else
+        return 0
+    fi
 }
 
-function dir_exists(){
-    install_dir=$1
-    dir_regex=$2
-    [ -d "$install_dir/$dir_regex" ] && return 0
-    return 1
+function get_package_name(){
+    workdir=$1
+    file=$2
+    type=$3
+    find $workdir -maxdepth 1 -iname "$file" -type $type
 }
 
-bin_exists . *.sh && echo "exists"
-dir_exists /home/yuhong4/develop/github/myconf ins* && echo "dir"
+#demo
+#package_exists /home/yuhong4/install 'java-7-*.tar.gz' f
+#get_package_name /home/yuhong4/install 'java-7-*.tar.gz' f
