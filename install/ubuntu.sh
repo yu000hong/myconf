@@ -31,6 +31,10 @@ sudo apt-get install -y htop
 #Fcitx输入法安装
 
 
+#python
+sudo apt-get install -y python
+sudo apt-get install -y python-pip
+
 #LMAP
 sudo apt-get install -y mysql-server
 sudo apt-get install -y mysql-client
