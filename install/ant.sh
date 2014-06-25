@@ -58,6 +58,6 @@ if [ $? -ne 0 ] ; then
     fail_install $SOFTWARE
     exit 1
 fi
-sudo . /etc/profile
+. /etc/profile
 
 success_install $SOFTWARE

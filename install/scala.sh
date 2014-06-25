@@ -8,11 +8,11 @@ INSTALL_DIR=${INSTALL_DIR:-/opt}
 WORK_DIR=${WORK_DIR:-~/install}
 
 # Constants
-SOFTWARE="template"
+SOFTWARE="scala"
 URL="http://.......tar.gz"
-FILENAME_REGEX="template*.tar.gz"
-DIR_REGEX="template*"
-PROFILE=/etc/profile.d/java.sh
+FILENAME_REGEX="scala*.tgz"
+DIR_REGEX="scala*"
+PROFILE=/etc/profile.d/scala.sh
 
 [ -d $WORK_DIR ] || mkdir $WORK_DIR
 cd $WORK_DIR
@@ -43,20 +43,6 @@ else
     exit 1
 fi
 
-echo "package: $packageName"
-exit 0
-
-##############################################
-#.deb package
-sudo dpkg -i $packageName
-if [ $? -eq 0 ] ; then
-    success_install $SOFTWARE
-    exit 0
-else
-    fail_install $SOFTWARE
-    exit 1
-fi
-
 ##############################################
 #.tar.gz package
 tar -xzf $packageName
@@ -68,8 +54,8 @@ sudo mv $packageDir $INSTALL_DIR || {
 #add profile
 sudo echo "#!/bin/bash" > $PROFILE
 sudo echo "#" >> $PROFILE
-sudo echo "export JAVA_HOME=${INSTALL_DIR}/`basename $packageDir`" >> $PROFILE
-sudo echo 'export PATH=$PATH:$JAVA_HOME/bin' >> $PROFILE
+sudo echo "export SCALA_HOME=${INSTALL_DIR}/`basename $packageDir`" >> $PROFILE
+sudo echo 'export PATH=$PATH:$SCALA_HOME/bin' >> $PROFILE
 if [ $? -ne 0 ] ; then
     fail_install $SOFTWARE
     exit 1
