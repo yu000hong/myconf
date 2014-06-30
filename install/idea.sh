@@ -10,8 +10,8 @@ WORK_DIR=${WORK_DIR:-~/install}
 # Constants
 SOFTWARE="Intellij IDEA"
 URL="http://download-cf.jetbrains.com/idea/ideaIC-13.1.3.tar.gz"
-FILENAME_REGEX="ideaIC*.tar.gz"
-DIR_REGEX="idea-IC**"
+FILENAME_REGEX="ideaIU*.tar.gz"
+DIR_REGEX="idea-IU*"
 PROFILE=/etc/profile.d/idea.sh
 
 [ -d $WORK_DIR ] || mkdir $WORK_DIR
