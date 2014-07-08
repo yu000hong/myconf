@@ -8,6 +8,8 @@ mkdir -p $INSTALL_DIR
 
 #linux develop environment
 sudo apt-get install -y build-essential
+#cmake
+sudo apt-get install -y cmake
 #mail
 sudo apt-get install -y mailutils
 

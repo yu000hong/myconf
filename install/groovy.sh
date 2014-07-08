@@ -8,11 +8,11 @@ INSTALL_DIR=${INSTALL_DIR:-/opt}
 WORK_DIR=${WORK_DIR:-~/install}
 
 # Constants
-SOFTWARE="template"
-URL="http://.......tar.gz"
-FILENAME_REGEX="template*.tar.gz"
-DIR_REGEX="template*"
-PROFILE=/etc/profile.d/java.sh
+SOFTWARE="Groovy"
+URL="http://dl.bintray.com/groovy/maven/groovy-binary-2.3.3.zip"
+FILENAME_REGEX="groovy-*.zip"
+DIR_REGEX="groovy-*"
+PROFILE=/etc/profile.d/groovy.sh
 
 [ -d $WORK_DIR ] || mkdir $WORK_DIR
 cd $WORK_DIR
@@ -43,32 +43,9 @@ else
     exit 1
 fi
 
-echo "package: $packageName"
-exit 0
-
-##############################################
-#.deb package
-sudo dpkg -i $packageName
-if [ $? -eq 0 ] ; then
-    success_install $SOFTWARE
-    exit 0
-else
-    fail_install $SOFTWARE
-    exit 1
-fi
-
 #######################################
 #.zip package
-unzip $packageName -d flex_sdk
-packageDir=`get_package_name $WORK_DIR "$DIR_REGEX" d`
-sudo mv $packageDir $INSTALL_DIR || {
-    fail_install $SOFTWARE
-    exit 1
-}
-
-##############################################
-#.tar.gz package
-tar -xzf $packageName
+unzip $packageName -d .
 packageDir=`get_package_name $WORK_DIR "$DIR_REGEX" d`
 sudo mv $packageDir $INSTALL_DIR || {
     fail_install $SOFTWARE
@@ -78,8 +55,8 @@ sudo mv $packageDir $INSTALL_DIR || {
 #add profile
 sudo echo "#!/bin/bash" > $PROFILE
 sudo echo "#" >> $PROFILE
-sudo echo "export JAVA_HOME=${INSTALL_DIR}/`basename $packageDir`" >> $PROFILE
-sudo echo 'export PATH=$PATH:$JAVA_HOME/bin' >> $PROFILE
+sudo echo "export GROOVY_HOME=${INSTALL_DIR}/`basename $packageDir`" >> $PROFILE
+sudo echo 'export PATH=$PATH:$GROOVY_HOME/bin' >> $PROFILE
 if [ $? -ne 0 ] ; then
     fail_install $SOFTWARE
     exit 1
