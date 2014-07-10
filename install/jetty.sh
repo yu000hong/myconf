@@ -8,17 +8,14 @@ INSTALL_DIR=${INSTALL_DIR:-/opt}
 WORK_DIR=${WORK_DIR:-~/install}
 
 # Constants
-SOFTWARE="template"
-URL="http://.......tar.gz"
-FILENAME_REGEX="template*.tar.gz"
-DIR_REGEX="template*"
-PROFILE=/etc/profile.d/template.sh
+SOFTWARE="jetty"
+URL="http://eclipse.org/downloads/download.php?file=/jetty/stable-8/dist/jetty-distribution-8.1.15.v20140411.tar.gz&r=1"
+FILENAME_REGEX="jetty-distribution*.tar.gz"
+DIR_REGEX="jetty-distribution*"
 
-#make sure that the work directory does exist
 [ -d $WORK_DIR ] || mkdir $WORK_DIR
 cd $WORK_DIR
 
-#if package file does not 
 package_exists $WORK_DIR "$FILENAME_REGEX" f
 if [ $? -eq 1 ] ; then 
     wget -c $URL || {
@@ -45,30 +42,7 @@ else
     exit 1
 fi
 
-echo "package: $packageName"
-exit 0
-
-##############################################
-#.deb package
-sudo dpkg -i $packageName
-if [ $? -eq 0 ] ; then
-    success_install $SOFTWARE
-    exit 0
-else
-    fail_install $SOFTWARE
-    exit 1
-fi
-
-#######################################
-#.zip package
-unzip $packageName -d template
-packageDir=`get_package_name $WORK_DIR "$DIR_REGEX" d`
-sudo mv $packageDir $INSTALL_DIR || {
-    fail_install $SOFTWARE
-    exit 1
-}
-
-##############################################
+#####################################
 #.tar.gz package
 tar -xzf $packageName
 packageDir=`get_package_name $WORK_DIR "$DIR_REGEX" d`
@@ -76,16 +50,5 @@ sudo mv $packageDir $INSTALL_DIR || {
     fail_install $SOFTWARE
     exit 1
 }
-
-#add profile
-sudo echo "#!/bin/bash" > $PROFILE
-sudo echo "#" >> $PROFILE
-sudo echo "export TEMPLATE_HOME=${INSTALL_DIR}/`basename $packageDir`" >> $PROFILE
-sudo echo 'export PATH=$PATH:$TEMPLATE_HOME/bin' >> $PROFILE
-if [ $? -ne 0 ] ; then
-    fail_install $SOFTWARE
-    exit 1
-fi
-. /etc/profile
 
 success_install $SOFTWARE

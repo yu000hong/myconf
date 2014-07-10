@@ -1,5 +1,8 @@
 #!/bin/bash
 
+CURRENT_USER=yuhong4
+CURRENT_GROUP=yuhong4
+
 function package_exists(){
     workdir=$1
     file=$2

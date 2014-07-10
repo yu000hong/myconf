@@ -8,17 +8,15 @@ INSTALL_DIR=${INSTALL_DIR:-/opt}
 WORK_DIR=${WORK_DIR:-~/install}
 
 # Constants
-SOFTWARE="template"
-URL="http://.......tar.gz"
-FILENAME_REGEX="template*.tar.gz"
-DIR_REGEX="template*"
-PROFILE=/etc/profile.d/template.sh
+SOFTWARE="gradle"
+URL="https://services.gradle.org/distributions/gradle-2.0-all.zip"
+FILENAME_REGEX="gradle-*.zip"
+DIR_REGEX="gradle*"
+PROFILE=/etc/profile.d/gradle.sh
 
-#make sure that the work directory does exist
 [ -d $WORK_DIR ] || mkdir $WORK_DIR
 cd $WORK_DIR
 
-#if package file does not 
 package_exists $WORK_DIR "$FILENAME_REGEX" f
 if [ $? -eq 1 ] ; then 
     wget -c $URL || {
@@ -45,43 +43,22 @@ else
     exit 1
 fi
 
-echo "package: $packageName"
-exit 0
-
-##############################################
-#.deb package
-sudo dpkg -i $packageName
-if [ $? -eq 0 ] ; then
-    success_install $SOFTWARE
-    exit 0
-else
-    fail_install $SOFTWARE
-    exit 1
-fi
-
 #######################################
 #.zip package
-unzip $packageName -d template
+unzip $packageName -d .
 packageDir=`get_package_name $WORK_DIR "$DIR_REGEX" d`
 sudo mv $packageDir $INSTALL_DIR || {
     fail_install $SOFTWARE
     exit 1
 }
-
-##############################################
-#.tar.gz package
-tar -xzf $packageName
-packageDir=`get_package_name $WORK_DIR "$DIR_REGEX" d`
-sudo mv $packageDir $INSTALL_DIR || {
-    fail_install $SOFTWARE
-    exit 1
-}
+packageDirname=`basename $packageDir`
+sudo chown -R $CURRENT_USER:$CURRENT_GROUP $INSTALL_DIR/$packageDirname
 
 #add profile
 sudo echo "#!/bin/bash" > $PROFILE
 sudo echo "#" >> $PROFILE
-sudo echo "export TEMPLATE_HOME=${INSTALL_DIR}/`basename $packageDir`" >> $PROFILE
-sudo echo 'export PATH=$PATH:$TEMPLATE_HOME/bin' >> $PROFILE
+sudo echo "export GRADLE_HOME=${INSTALL_DIR}/`basename $packageDir`" >> $PROFILE
+sudo echo 'export PATH=$PATH:$GRADLE_HOME/bin' >> $PROFILE
 if [ $? -ne 0 ] ; then
     fail_install $SOFTWARE
     exit 1
