@@ -29,6 +29,8 @@ sudo apt-get install -y rar unrar
 sudo apt-get install -y openssh-server
 #htop
 sudo apt-get install -y htop
+#xclip
+sudo apt-get install -y xclip
 
 #Fcitx输入法安装
 
