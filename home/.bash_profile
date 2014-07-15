@@ -6,3 +6,4 @@ set | grep DBUS_SESSION_BUS_ADDRESS > ~/.DBUS_temp
 # File .bash_aliases would be sourced by .bashrc
 alias grep='grep --color=auto'
 alias rm='rm -i'
+alias guiclip='xclip -selection clipboard'
